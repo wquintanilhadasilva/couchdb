@@ -1,0 +1,35 @@
+<div class="container">
+
+  <p></p>
+
+  <div class="row">
+    
+    <div class="col-6">
+
+        <p-dataGrid [value]="estados" [paginator]="true" [rows]="5">
+            <p-header>Lista de Estados -
+              <small>Arquivo JSON</small>
+            </p-header>
+            <p-footer>Escolha um item da lista</p-footer>
+            <ng-template let-uf pTemplate="item">
+              <div style="padding:3px" class="ui-g-12 ui-md-3">
+                <p-panel [header]="uf.sigla" [style]="{'text-align':'center'}">
+                    <a routerLink="/ufs/{{uf.id}}/editar">{{uf.nome}}</a>
+                    <br/>
+                  <i class="fa fa-plus-circle" (click)="selectUf(uf)" style="cursor:pointer"></i>
+                </p-panel>
+              </div>
+            </ng-template>
+          </p-dataGrid>
+
+    </div>
+
+    <div class="col-6">
+
+        <app-couch-uf></app-couch-uf>
+
+      </div>
+
+  </div>
+
+</div>
