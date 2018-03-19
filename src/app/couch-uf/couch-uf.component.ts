@@ -25,7 +25,7 @@ export class CouchUfComponent implements OnInit {
     this.loadUFs();
 
     this.frmCouch = this.formBuilder.group({
-      id: [null, Validators.required],
+      id: [{value: null, disabled: false}, Validators.required],
       _id: [{value: null, disabled: false}, [Validators.required]],
       sigla: [null, [Validators.required]],
       nome: [null, [Validators.required]],

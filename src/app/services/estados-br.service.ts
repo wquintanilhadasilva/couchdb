@@ -43,14 +43,15 @@ export class EstadosBrService {
   }
 
   public deleteDocCouchDb(estado: models.EstadoBr): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'If-Match':  estado._rev,
-        'Content-Type': 'application/json'
-      })
-    };
-    console.log(httpOptions);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'if-match':  `${estado._rev}`,
+    //     'Content-Type': 'application/json',
+    //   })
+    // };
     return this.http.delete(`http://10.1.194.161:5984/estados/${estado._id}?rev=${estado._rev}`);
+    // console.log(httpOptions);
+    // return this.http.delete(`http://10.1.194.161:5984/estados/${estado._id}`, httpOptions);
   }
 
 }
