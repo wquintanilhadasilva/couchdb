@@ -21,7 +21,7 @@ export class ManterUfComponent implements OnInit {
 
     this.formulario = this.formBuilder.group(
       {
-        id: [null, Validators.required],
+        id: [{value: null, disabled: true}, Validators.required],
         sigla: [null, Validators.required],
         nome: [null, Validators.required]
       }
