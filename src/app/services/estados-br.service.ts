@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -24,18 +24,12 @@ export class EstadosBrService {
           return registro;
         }
       }
-
-      // for (let i = 0; i < r.length; i++) {
-      //   if (Number(r[i].id) === id) {
-      //     return r[i];
-      //   }
-      // }
       return null;
     });
   }
 
   public getCouchDbUfs(): Observable<models.EstadoBr[]> {
-    return this.http.get('http://localhost:5984/estados/_design/estadosdoc/_view/_all')
+    return this.http.get('http://10.1.194.161:5984/estados/_design/estadosdoc/_view/_all')
         .map(json => {
           const retorno: models.EstadoBr[] = [];
           const o = json['rows'] as Array<any>;
@@ -43,5 +37,21 @@ export class EstadosBrService {
           return retorno;
         });
   }
+
+  public saveDocCouchDb(estado: models.EstadoBr): Observable<any> {
+    return this.http.post('http://10.1.194.161:5984/estados', estado);
+  }
+
+  public deleteDocCouchDb(estado: models.EstadoBr): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'If-Match':  estado._rev,
+        'Content-Type': 'application/json'
+      })
+    };
+    console.log(httpOptions);
+    return this.http.delete(`http://10.1.194.161:5984/estados/${estado._id}?rev=${estado._rev}`);
+  }
+
 }
 

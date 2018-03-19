@@ -3,7 +3,11 @@
   <div class="col-12">
     <form class="form-horizontal" [formGroup]="frmCouch" (ngSubmit)="onSubmitCouchDb()">
 
-      <div class="form-group" [ngClass]="aplicaCssErro('nome')">
+      <div style="display:none;">
+        <input type="text" class="form-control" id="_rev" placeholder="Número da revisão" formControlName="_rev">
+      </div>
+
+      <div class="form-group" style="display:none;" [ngClass]="aplicaCssErro('nome')">
         <div class="col-md-12">
           <label for="_id" class="control-label">Key</label>
         </div>
@@ -23,7 +27,7 @@
 
       <div class="form-group" [ngClass]="aplicaCssErro('nome')">
         <div class="col-md-12">
-          <label for="sigla" class="control-label">Key</label>
+          <label for="sigla" class="control-label">Sigla</label>
         </div>
         <div class="col-md-12">
           <input type="text" class="form-control" id="sigla" placeholder="Sigla do Estado" formControlName="sigla">
@@ -57,6 +61,7 @@
           <th scope="col">id</th>
           <th scope="col">Sigla</th>
           <th scope="col">Nome</th>
+          <th scope="col">Excluir</th>
         </tr>
       </thead>
       <tbody>
@@ -67,6 +72,11 @@
               <td>{{uf.id}}</td>
               <td>{{uf.sigla}}</td>
               <td>{{uf.nome}}</td>
+              <td>
+                <a href="javascript:void(0)" (click)="deletRow(uf)">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </a>
+              </td>
             </tr>
       </tbody>
     </table>

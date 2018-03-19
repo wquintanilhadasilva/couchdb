@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { EstadosBrService } from '../services/estados-br.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
@@ -9,6 +9,9 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class CouchUfComponent implements OnInit {
 
+  @Input()
+  onInsert: EventEmitter<any>;
+
   constructor(
     private formBuilder: FormBuilder,
     private services: EstadosBrService) { }
@@ -18,19 +21,33 @@ export class CouchUfComponent implements OnInit {
   frmCouch: FormGroup;
 
   ngOnInit() {
-    this.services.getCouchDbUfs().subscribe(r => this.rows = r);
+
+    this.loadUFs();
 
     this.frmCouch = this.formBuilder.group({
       id: [null, Validators.required],
-      _id: [{value: null, disabled: true}, [Validators.required, Validators.required]],
-      sigla: [null, [Validators.required, Validators.required]],
-      nome: [null, [Validators.required, Validators.required]]
+      _id: [{value: null, disabled: false}, [Validators.required]],
+      sigla: [null, [Validators.required]],
+      nome: [null, [Validators.required]],
+      _rev: [{value: null, disabled: false}, [Validators.required]],
+    });
+
+    this.onInsert.subscribe(r => {
+      this.loadUFs();
     });
 
   }
 
   onSubmitCouchDb() {
-
+    if (this.frmCouch.valid) {
+      this.services.saveDocCouchDb(this.frmCouch.value).subscribe(
+        r => {
+          console.log(r);
+          this.loadUFs();
+          this.resetar();
+        }
+      );
+    }
   }
 
   selectRow(estado: models.EstadoBr) {
@@ -38,8 +55,17 @@ export class CouchUfComponent implements OnInit {
   this.frmCouch.patchValue({
     id: estado.id,
     _id: estado._id,
+    _rev: estado._rev,
     sigla: estado.sigla,
     nome: estado.nome
+    });
+  }
+
+  deletRow(estado: models.EstadoBr) {
+    this.services.deleteDocCouchDb(estado).subscribe( r => {
+      console.log(r);
+      this.loadUFs();
+      this.resetar();
     });
   }
 
@@ -78,6 +104,10 @@ export class CouchUfComponent implements OnInit {
 
   verificaInValid(campo) {
     return !this.frmCouch.get(campo).valid && (this.frmCouch.get(campo).touched || this.frmCouch.get(campo).dirty);
+  }
+
+  loadUFs() {
+    this.services.getCouchDbUfs().subscribe(r => this.rows = r);
   }
 
 }

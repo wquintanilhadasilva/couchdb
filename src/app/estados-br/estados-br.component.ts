@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { EstadosBrService } from '../services/estados-br.service';
 
 @Component({
@@ -10,6 +10,9 @@ export class EstadosBrComponent implements OnInit {
 
   estados: models.EstadoBr[];
 
+  @Output()
+  after_insert = new EventEmitter();
+
   constructor(private services: EstadosBrService) { }
 
   ngOnInit() {
@@ -20,6 +23,13 @@ export class EstadosBrComponent implements OnInit {
 
   selectUf(uf: models.EstadoBr) {
     console.log(uf);
+    this.services.saveDocCouchDb(uf).subscribe(
+      r => {
+        console.log(r);
+      this.after_insert.emit({response: r, register: uf});
+      }
+    );
+
   }
 
 }
