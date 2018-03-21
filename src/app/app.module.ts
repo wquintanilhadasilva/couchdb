@@ -10,12 +10,14 @@ import {DataGridModule} from 'primeng/datagrid';
 import {PanelModule} from 'primeng/panel';
 
 import { AppComponent } from './app.component';
-import { EstadosBrComponent } from './estados-br/estados-br.component';
 import { EstadosBrService } from './services/estados-br.service';
 import { ManterUfComponent } from './manter-uf/manter-uf.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CouchUfComponent } from './couch-uf/couch-uf.component';
+import { EstadosBrComponent } from './estados-br/estados-br.component';
+import { MunicipiosBrService } from './services/municipios-br.service';
+import { CidadesComponent } from './cidades/cidades.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { CouchUfComponent } from './couch-uf/couch-uf.component';
     EstadosBrComponent,
     ManterUfComponent,
     HomeComponent,
-    CouchUfComponent
+    CouchUfComponent,
+    CidadesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { CouchUfComponent } from './couch-uf/couch-uf.component';
     AppRoutingModule,
     NgbModule.forRoot()
   ],
-  providers: [EstadosBrService],
+  providers: [EstadosBrService, MunicipiosBrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
