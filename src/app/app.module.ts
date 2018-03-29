@@ -8,6 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {DataGridModule} from 'primeng/datagrid';
 import {PanelModule} from 'primeng/panel';
+import {AccordionModule} from 'primeng/accordion';
 
 import { AppComponent } from './app.component';
 import { EstadosBrService } from './services/estados-br.service';
@@ -38,6 +39,7 @@ import { CidadesComponent } from './cidades/cidades.component';
     DataGridModule,
     PanelModule,
     AppRoutingModule,
+    AccordionModule,
     NgbModule.forRoot()
   ],
   providers: [EstadosBrService, MunicipiosBrService],

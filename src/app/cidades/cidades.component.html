@@ -1,10 +1,88 @@
 <div class="container">
 
+  <!--
   <div class="col-12">
     <a routerLink="/ufs">Manter Estados</a>
   </div>
   <p>
     <button class="btn btn-default" (click)="carregarCidades()">Carregar Cidades</button>
   </p>
+
+-->
+
+  <div>
+    <div class="row">
+      <div class="col-6">Nome</div>
+      <div class="col-6">CEP</div>
+    </div>
+
+    <div class="row" *ngFor="let cd of cidades">
+        <div class="row" (click)="cd.exibir = !cd.exibir">
+          <div class="col-6">{{cd.nome}} </div>
+          <div class="col-6">{{cd.cep}}</div>
+        </div>
+        <div class="row" *ngIf="cd.exibir">
+            <div class="col-12">
+                <p-accordion [multiple]="false">
+  
+                    <p-accordionTab header="{{cd.nome}}">
+                        {{cd.nome}} | {{cd.cep}}
+                    </p-accordionTab>
+              
+                </p-accordion>  
+            </div>
+          </div>
+        
+    </div>
+
+  </div>
+
+  <p></p>
+  <br/>
+
+  <table class="table">
+      <thead>
+        <th>Cidade</th>
+        <th>CEP Padrão</th>
+      </thead>
+      <tbody>
+          <tr *ngFor="let cd of cidades; let i = index" [ngClass]="{activetab: isActive(cd.nome)}">
+              <div (click)="getSub(cd.nome);">
+                  <!-- use the uniqueId here  -->
+                  <!--Linha: {{i}} -->
+                  <span class="ui-accordion-toggle-icon fa fa-fw" [ngClass]="{'fa-caret-down' : isActive(cd.nome), 'fa-caret-right' : !isActive(cd.nome) }" > 
+
+                  </span>
+                  <span class="ui-accordion-header-text ng-tns-c2-5 ng-star-inserted">
+                      <td>{{cd.nome}}</td>
+                      <td>{{cd.cep}}</td>
+                  </span>
+                  
+              </div>
+              <div *ngIf="isActive(cd.nome)">
+
+                  <p-accordion [multiple]="false">
+  
+                      <p-accordionTab header="{{cd.nome}}">
+                          {{cd.nome}} | {{cd.cep}}
+                      </p-accordionTab>
+                
+                  </p-accordion>  
+
+                  <table class="table table-striped table-bordered table-hover" >
+                      <tbody>
+                          <tr *ngFor="let cd2 of cidades">
+                              <td>{{cd2.nome}}</td>
+                              <td>{{cd2.cep}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  
+              </div>
+              
+          </tr>
+      </tbody>
+  </table>
+
 
 </div>
