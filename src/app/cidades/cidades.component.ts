@@ -9,7 +9,7 @@ import { MunicipiosBrService } from '../services/municipios-br.service';
 export class CidadesComponent implements OnInit {
 
   cidades = [
-    {nome: 'Goiânia', cep: '74000', exibir: false},
+    {nome: 'Goiânia', cep: '74000', exibir: true},
     {nome: 'Mato Grosso do Sul', cep: '88777', exibir: false},
     {nome: 'Carolina do Norte', cep: '65490', exibir: false},
     {nome: 'Pontalina', cep: '432987', exibir: false},
