@@ -35,7 +35,7 @@
 <!-- custom component with custom template -->
 <app-custom-data-list [dataList]="lessons" [rowTemplate]="rodrigo">
   <ng-template #rodrigo let-row="item" let-idx="index">
-   {{row | json}}
+   {{row}}
    {{idx}}
    <!-- meu-mapa [veiculo]="row"></meu-mapa -->
   
