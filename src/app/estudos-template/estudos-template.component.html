@@ -1,0 +1,44 @@
+<ng-template #customTabButtons>
+  <button class="tab-button" (click)="login()">{{loginText}}</button>
+  <button class="tab-button" (click)="signUp()">{{signUpText}}</button>
+</ng-template>
+
+<div *ngIf="lessons">
+  <div class="lesson" *ngFor="let lesson of lessons">
+    <div class="lição-detalhe">
+      {{ lesson | json }}
+    </div>
+  </div>
+</div>
+
+
+<ng-container *ngIf="lessons">
+  <div class="lesson" *ngFor="let lesson of lessons">
+    <div class="lesson-detail">
+      {{lesson | json}}
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-container *ngTemplateOutlet="loading"></ng-container>
+
+<ng-template #estimateTemplate let-lessonsCounterx="estimate1">
+  <div> Approximately {{lessonsCounterx}} lessons ...</div>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="estimateTemplate;context:ctx"></ng-container>
+
+
+<app-tab-container [headerTemplate]="customTabButtons"></app-tab-container>
+
+<!-- custom component with custom template -->
+<app-custom-data-list [dataList]="lessons" [rowTemplate]="rodrigo">
+  <ng-template #rodrigo let-row="item" let-idx="index">
+   {{row | json}}
+   {{idx}}
+   <!-- meu-mapa [veiculo]="row"></meu-mapa -->
+  
+  </ng-template>
+
+</app-custom-data-list>

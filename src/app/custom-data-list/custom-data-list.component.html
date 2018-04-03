@@ -1,0 +1,16 @@
+<ng-template #defaultList>
+    <div>
+        Nenhum dado a ser exibido....
+    </div>
+</ng-template>
+
+<h3>Template dinamico</h3>
+<ng-container *ngIf="rowTemplate && dataList && dataList.length > 0 ">
+  <div *ngFor="let item of dataList; index as i">
+    <ng-container *ngTemplateOutlet="rowTemplate ? rowTemplate: defaultList;context:{item: item, index: i}"></ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!rowTemplate || !dataList || dataList.length === 0 ">
+    <ng-container *ngTemplateOutlet="defaultList"></ng-container>
+</ng-container>

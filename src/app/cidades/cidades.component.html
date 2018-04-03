@@ -1,4 +1,4 @@
-<div class="container text-center">
+<div class="container">
     <div class="row">
 
         <div class="col-6">
@@ -16,19 +16,21 @@
 
         <div class="row">
 
-            <div class="col-6 text-left">
+            <div class="col-8 text-left">
                 <span class="ui-accordion-toggle-icon fa fa-fw" [ngClass]="{'fa-caret-down' : isActive(cd.nome), 'fa-caret-right' : !isActive(cd.nome) }">
 
                 </span>
                 {{cd.nome}}
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 {{cd.cep}}
             </div>
         </div>
         <div class="row" *ngIf="isActive(cd.nome)" [ngClass]="{activetab: isActive(cd.nome)}">
-            <div class="col-12 text-center">
-                {{cd | json}}
+            <div class="col-12">
+                <pre>
+                    {{cd | json}}
+                </pre>
             </div>
         </div>
     </div>

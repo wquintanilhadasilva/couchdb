@@ -19,6 +19,9 @@ import { CouchUfComponent } from './couch-uf/couch-uf.component';
 import { EstadosBrComponent } from './estados-br/estados-br.component';
 import { MunicipiosBrService } from './services/municipios-br.service';
 import { CidadesComponent } from './cidades/cidades.component';
+import { EstudosTemplateComponent } from './estudos-template/estudos-template.component';
+import { TabContainerComponent } from './tab-container/tab-container.component';
+import { CustomDataListComponent } from './custom-data-list/custom-data-list.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { CidadesComponent } from './cidades/cidades.component';
     ManterUfComponent,
     HomeComponent,
     CouchUfComponent,
-    CidadesComponent
+    CidadesComponent,
+    EstudosTemplateComponent,
+    TabContainerComponent,
+    CustomDataListComponent
   ],
   imports: [
     BrowserModule,
